@@ -1,0 +1,49 @@
+{% extends 'index.html' %}
+
+{% block scripts %}
+
+<!-- 
+ -->
+
+<script>
+    $(document).ready(function(){
+        
+        const dataDoughnut = {
+    labels: [{% for club in clubs %} '{{ club.name }}', {% endfor %}],
+    datasets: [
+      {
+        label: "My First Dataset",
+        data: [{% for club in clubs %}{{ club.money }}, {% endfor %}],
+        backgroundColor: [
+          "rgb(133, 105, 241)",
+          "rgb(164, 101, 241)",
+          "rgb(101, 143, 241)",
+        ],
+        hoverOffset: 4,
+      },
+    ],
+  };
+
+  const configDoughnut = {
+    type: "doughnut",
+    data: dataDoughnut,
+    options: {},
+  };
+
+  var chartBar = new Chart(
+    document.getElementById("chartDoughnut"),
+    configDoughnut
+  );
+
+    });
+</script>
+
+{% endblock scripts %}
+
+{% block content %}    
+
+<div class="shadow-lg rounded-lg overflow-hidden">
+    <canvas class="p-10" id="chartDoughnut"></canvas>
+</div>
+
+{% endblock content %}
