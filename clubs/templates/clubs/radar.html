@@ -1,0 +1,57 @@
+{% extends 'index.html' %}
+
+{% block scripts %}
+  <script>
+$(document).ready(function(){
+    const dataRadar = {
+      labels: [
+      {% for club in clubs %} '{{ club.name }}', {% endfor %}
+      ],
+      datasets: [
+        {
+          label: "Pul",
+          data: [{% for club in clubs %}{{ club.money }}, {% endfor %}],
+          fill: true,
+          backgroundColor: "rgba(133, 105, 241, 0.2)",
+          borderColor: "rgb(133, 105, 241)",
+          pointBackgroundColor: "rgb(133, 105, 241)",
+          pointBorderColor: "#fff",
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: "rgb(133, 105, 241)",
+        },
+        {
+          label: "Tezlik",
+          data: [{% for club in clubs %}{{ club.speed }}, {% endfor %}],
+          fill: true,
+          backgroundColor: "rgba(54, 162, 235, 0.2)",
+          borderColor: "rgb(54, 162, 235)",
+          pointBackgroundColor: "rgb(54, 162, 235)",
+          pointBorderColor: "#fff",
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: "rgb(54, 162, 235)",
+        },
+      ],
+    };
+
+    const configRadarChart = {
+      type: "radar",
+      data: dataRadar,
+      options: {},
+    };
+  
+    var chartBar = new Chart(
+      document.getElementById("chartRadar"),
+      configRadarChart
+    );
+});
+  </script>
+
+{% endblock scripts %}
+
+{% block content %}  
+
+    <div class="shadow-lg rounded-lg overflow-hidden">
+        <canvas class="p-10" id="chartRadar"></canvas>
+    </div>
+
+{% endblock content %}
