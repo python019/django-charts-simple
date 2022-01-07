@@ -7,12 +7,12 @@
         
     const ctx = document.getElementById('myChart').getContext('2d');
     const myChart = new Chart(ctx, {
-        type: 'bar',
+        type: 'pie',
         data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: [{% for club in clubs %} '{{ club.name }}', {% endfor %}],
             datasets: [{
                 label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
+                data: [{% for club in clubs %}{{ club.money }}, {% endfor %}],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -48,6 +48,6 @@
 
 {% block content %}    
 
-<canvas id="myChart" width="400" height="400"></canvas>
+<canvas id="myChart" width="200" height="80"></canvas>
 
 {% endblock content %}
